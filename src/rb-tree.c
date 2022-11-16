@@ -505,3 +505,20 @@ int rb_tree_num_entries(RBTree *tree)
 	return tree->num_nodes;
 }
 
+int rb_tree_subtree_height(RBTreeNode *node) {
+	if (node == NULL) {
+		return 0;
+	}
+	else {
+		int hleft = rb_tree_subtree_height(node->children[RB_TREE_NODE_LEFT]);
+		int hright = rb_tree_subtree_height(node->children[RB_TREE_NODE_RIGHT]);
+		if (hleft > hright) {
+			return hleft + 1;
+		}
+		else {
+			return hright + 1;
+		}
+	}
+	return 0;
+}
+
